@@ -1,0 +1,25 @@
+# Secrets
+.env
+
+# IDE files
+/.vscode
+/.idea
+*.iml
+
+# Build files
+/node_modules
+/docs
+/dist
+
+
+# Others
+.DS_Store
+
+*.json
+
+!package.json
+!yarn.lock
+!tsconfig*.json
+!prettierrc.json
+!typedoc.json
+

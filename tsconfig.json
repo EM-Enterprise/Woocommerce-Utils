@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node", "jest", "jest-expect-message"],
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "declaration": true,
+    "declarationMap": true,
+    "stripInternal": false,
+    "noImplicitAny": true,
+    "paths": {
+      "@/*": ["./*"],
+      "@/typings/*": ["./typings/*"],
+      "@/functions/*": ["./functions/*"],
+      "@/schemas/*": ["./schemas/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "docs"]
+}

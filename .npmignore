@@ -1,0 +1,16 @@
+## Secrets
+.env
+.actrc
+.github_secrets
+
+*
+
+!/docs/**
+!/dist/**
+!package.json
+!yarn.lock
+!tsconfig.json
+!tsconfig.build.json
+!ReadMe.md
+
+
