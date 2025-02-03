@@ -104,3 +104,9 @@ export type Product = z.infer<typeof ProductSchema>
 
 const { validateObject: validateProduct, getDummyObject: getDummyProduct, safeParseObject: safeParseProduct } = useSchema<Product>(ProductSchema)
 export { validateProduct, getDummyProduct, safeParseProduct }
+
+const ProductsSchema = z.array(ProductSchema)
+export type Products = z.infer<typeof ProductsSchema>
+
+const { validateObject: validateProducts, getDummyObject: getDummyProducts, safeParseObject: safeParseProducts } = useSchema<Products>(ProductsSchema)
+export { validateProducts, getDummyProducts, safeParseProducts }
