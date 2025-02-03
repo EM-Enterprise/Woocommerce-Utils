@@ -3,14 +3,14 @@ import { useSchema } from '@/schemas/utils/useSchema'
 
 const dateString = z.string().transform((val) => new Date(val))
 const emptyStringToNull = z.string().transform((val) => (val === '' ? null : val))
-const stringToNumber = z.string().transform((val) => parseFloat(val))
+const stringToNumber = z.string().transform((val) => (val.trim().length > 0 ? parseFloat(val) : null))
 
 const ProductSchema = z.object({
   id: z.number(),
   name: z.string(),
   slug: z.string(),
   permalink: z.string(),
-  date_created: dateString,
+  date_created: dateString.nullable(),
   date_modified: dateString,
   type: z.enum(['simple', 'variable', 'grouped', 'external']).default('simple'),
   description: emptyStringToNull.default(''),
@@ -20,13 +20,11 @@ const ProductSchema = z.object({
   sale_price: stringToNumber.optional(),
   regular_price: stringToNumber,
   weight: stringToNumber.optional(),
-  dimensions: z
-    .object({
-      length: stringToNumber.optional(),
-      width: stringToNumber.optional(),
-      height: stringToNumber.optional(),
-    })
-    .optional(),
+  dimensions: z.object({
+    length: stringToNumber.nullable(),
+    width: stringToNumber.nullable(),
+    height: stringToNumber.nullable(),
+  }),
   tax_status: z.enum(['taxable', 'shipping', 'none']).default('taxable'),
   tax_class: z.string().optional(),
 
@@ -35,11 +33,11 @@ const ProductSchema = z.object({
   catalog_visibility: z.enum(['visible', 'catalog', 'search', 'hidden']).default('visible'),
 
   on_sale: z.boolean().default(false),
-  date_on_sale_from: dateString.optional(),
-  date_on_sale_to: dateString.optional(),
+  date_on_sale_from: dateString.nullable(),
+  date_on_sale_to: dateString.nullable(),
 
   manage_stock: z.boolean().default(false),
-  stock_quantity: z.number().optional(),
+  stock_quantity: z.number().nullable(),
   stock_status: z.enum(['instock', 'outofstock', 'onbackorder']).default('instock'),
   backorders: z.enum(['no', 'notify', 'yes']).default('no'),
   backorders_allowed: z.boolean().default(false),
@@ -95,6 +93,15 @@ const ProductSchema = z.object({
         id: z.number(),
         name: z.string(),
         option: z.string(),
+      }),
+    )
+    .default([]),
+  meta_data: z
+    .array(
+      z.object({
+        id: z.number(),
+        key: z.string(),
+        value: z.any(),
       }),
     )
     .default([]),
