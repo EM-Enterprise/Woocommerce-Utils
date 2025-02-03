@@ -18,7 +18,7 @@ export function useWoocommerce() {
 /**
  * Creates a URLSearchParams object from a given filters / params object.
  */
-export function createSearchParams(filters: object | undefined) {
+function createSearchParams(filters: object | undefined) {
   if (!filters) return new URLSearchParams()
 
   const searchParams = new URLSearchParams()
