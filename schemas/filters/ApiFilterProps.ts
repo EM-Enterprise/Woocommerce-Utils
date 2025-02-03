@@ -20,3 +20,21 @@ export type ApiFilterProps = z.infer<typeof strippedSchema>
 export function validateApiFilterProps(object: any) {
   return ApiFilterPropsSchema.parse(object)
 }
+
+/**
+ * Extends the ApiFilterPropsSchema with additional properties.
+ * @param schema The schema to extend the ApiFilterPropsSchema with.
+ * @internal
+ * @example
+ *
+ * const ProductFilterPropsSchema = extendApiFilterPropsSchema(
+ *   z.object({
+ *     propX: z.string().optional(),
+ *   }),
+ * )
+ *
+ * export type ProductFilterProps = z.infer<typeof ProductFilterPropsSchema>
+ */
+export function extendApiFilterPropsSchema(schema: z.ZodObject<any, any>) {
+  return ApiFilterPropsSchema.merge(schema)
+}
