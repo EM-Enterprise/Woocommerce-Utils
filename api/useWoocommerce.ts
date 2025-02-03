@@ -2,16 +2,6 @@ import Woocommerce from '@woocommerce/woocommerce-rest-api'
 import { getCredentials } from '@/api/Credentials'
 import { z } from 'zod'
 
-export interface ErrorResponse {
-  response: {
-    data: any
-  }
-}
-
-export interface SuccessfulResponse<T> {
-  data: T
-}
-
 const endpointSchema = z.string().refine((val) => !val.startsWith('/'), {
   message: "Endpoint cannot start with '/'",
   path: ['endpoint'],
