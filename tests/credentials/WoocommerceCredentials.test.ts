@@ -16,8 +16,10 @@ describe('WoocommerceCredentials', () => {
       url: 'https://example.com',
     }
 
-    setCredentials(credentials)
+    expect(() => setCredentials(credentials)).not.toThrow()
 
-    expect(getCredentials()).toEqual(credentials)
+    expect(getCredentials().url === credentials.url, 'Expect url to match credentials').toBe(true)
+    expect(getCredentials().consumerKey === credentials.consumerKey, "Expect consumerKey's to match credentials").toBe(true)
+    expect(getCredentials().consumerSecret === credentials.consumerSecret, "Expect consumerSecrets's to match credentials").toBe(true)
   })
 })
