@@ -16,7 +16,7 @@
     "noImplicitAny": true,
     "paths": {
       "@/*": ["./*"],
-      "@/typings/*": ["./typings/*"],
+      "@/api/*": ["./api/*"],
       "@/functions/*": ["./functions/*"],
       "@/schemas/*": ["./schemas/*"]
     }
