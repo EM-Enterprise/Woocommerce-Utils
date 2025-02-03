@@ -12,6 +12,10 @@ const WoocommerceCredentialsSchema = z.object({
 
 export type WoocommerceCredentials = z.infer<StripZodDefault<typeof WoocommerceCredentialsSchema>>
 
+/**
+ * Validates the given object against the WoocommerceCredentials schema and provides default values for missing properties
+ * @internal
+ */
 export function validateWoocommerceCredentials(object: any) {
   return WoocommerceCredentialsSchema.parse(object)
 }
