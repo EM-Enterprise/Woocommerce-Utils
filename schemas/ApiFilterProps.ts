@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { stripZodDefault } from '@/schemas/utils/stripZodDefaultValues'
 
-const OrderFilterPropsSchema = z.object({
+const ApiFilterPropsSchema = z.object({
   page: z.number().min(1, { message: 'The page must be at least 1.' }).optional().default(1),
   per_page: z.number().min(1).max(1000, { message: 'The per_page value must not be larger than 1000' }).optional().default(10),
   exclude: z.array(z.string()).optional(),
@@ -11,12 +11,12 @@ const OrderFilterPropsSchema = z.object({
   status: z.enum(['pending', 'processing', 'on-hold', 'completed', 'cancelled', 'refunded', 'failed', 'trash', 'any']).optional().default('any'),
 })
 
-const strippedSchema = stripZodDefault(OrderFilterPropsSchema)
-export type OrderFilterProps = z.infer<typeof strippedSchema>
+const strippedSchema = stripZodDefault(ApiFilterPropsSchema)
+export type ApiFilterProps = z.infer<typeof strippedSchema>
 
 /**
- * Validates a given object against the OrderFilterPropsSchema and provides default values for required properties.
+ * Validates a given object against the ApiFilterPropsSchema and provides default values for required properties.
  */
-export function validateOrderFilterProps(object: any) {
-  return OrderFilterPropsSchema.parse(object)
+export function validateApiFilterProps(object: any) {
+  return ApiFilterPropsSchema.parse(object)
 }
