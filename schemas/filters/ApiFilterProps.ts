@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z, ZodRawShape } from 'zod'
 import { stripZodDefault } from '@/schemas/utils/stripZodDefaultValues'
 
 const ApiFilterPropsSchema = z.object({
@@ -34,6 +34,6 @@ export function validateApiFilterProps(object: any) {
  *
  * export type ProductFilterProps = z.infer<typeof ProductFilterPropsSchema>
  */
-export function extendApiFilterPropsSchema(schema: z.ZodObject<any, any>) {
-  return ApiFilterPropsSchema.merge(schema)
+export function extendApiFilterPropsSchema<T extends ZodRawShape>(schema: T) {
+  return ApiFilterPropsSchema.extend(schema)
 }
