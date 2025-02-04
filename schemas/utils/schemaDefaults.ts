@@ -79,6 +79,9 @@ export default function schemaDefaults<Schema extends z.ZodFirstPartySchemaTypes
     case z.ZodFirstPartyTypeKind.ZodCatch:
       return schema._def.catchValue.call(null, {} as any)
 
+    case z.ZodFirstPartyTypeKind.ZodEffects:
+      return schemaDefaults((schema as any)._def.schema, options)
+
     default:
       throw new Error(`Unsupported type ${(schema as any)._def.typeName}`)
   }
