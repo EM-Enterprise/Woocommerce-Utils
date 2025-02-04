@@ -76,33 +76,39 @@ const ProductSchema = z.object({
   variations: z.array(z.number()).default([]),
   attributes: z
     .array(
-      z.object({
-        id: z.number(),
-        name: z.string(),
-        position: z.number(),
-        visible: z.boolean(),
-        variation: z.boolean().default(false),
-        options: z.array(z.string()),
-      }),
+      z
+        .object({
+          id: z.number(),
+          name: z.string(),
+          position: z.number().optional(),
+          visible: z.boolean().optional(),
+          variation: z.boolean().default(false).optional(),
+          options: z.array(z.string()).optional(),
+        })
+        .passthrough(),
     )
     .default([]),
 
   default_attributes: z
     .array(
-      z.object({
-        id: z.number(),
-        name: z.string(),
-        option: z.string(),
-      }),
+      z
+        .object({
+          id: z.number(),
+          name: z.string(),
+          option: z.string(),
+        })
+        .passthrough(),
     )
     .default([]),
   meta_data: z
     .array(
-      z.object({
-        id: z.number(),
-        key: z.string(),
-        value: z.any(),
-      }),
+      z
+        .object({
+          id: z.number(),
+          key: z.string(),
+          value: z.any(),
+        })
+        .passthrough(),
     )
     .default([]),
 })
