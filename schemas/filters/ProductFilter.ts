@@ -1,7 +1,7 @@
-import { extendApiFilterPropsSchema } from '@/schemas/filters/ApiFilterProps'
+import { extendBaseFilterPropsSchema } from '@/schemas/filters/BaseFilterProps'
 import { z } from 'zod'
 
-const ProductFilterPropsSchema = extendApiFilterPropsSchema({
+const ProductFilterPropsSchema = extendBaseFilterPropsSchema({
   status: z.enum(['draft', 'pending', 'private', 'publish', 'any']).default('any').optional(),
   include_status: z.array(z.enum(['draft', 'pending', 'private', 'publish', 'any'])).optional(),
   exclude_status: z.array(z.enum(['draft', 'pending', 'private', 'publish', 'any'])).optional(),

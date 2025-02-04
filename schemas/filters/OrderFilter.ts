@@ -1,7 +1,7 @@
-import { extendApiFilterPropsSchema } from '@/schemas/filters/ApiFilterProps'
+import { extendBaseFilterPropsSchema } from '@/schemas/filters/BaseFilterProps'
 import { z } from 'zod'
 
-const OrderFilterPropsSchema = extendApiFilterPropsSchema({
+const OrderFilterPropsSchema = extendBaseFilterPropsSchema({
   status: z.enum(['pending', 'processing', 'on-hold', 'completed', 'cancelled', 'refunded', 'failed', 'trash', 'any']).optional().default('any'),
 })
 
