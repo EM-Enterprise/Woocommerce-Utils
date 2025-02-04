@@ -2,13 +2,12 @@ import { z } from 'zod'
 import { stripZodDefault } from '@/schemas/utils/stripZodDefaultValues'
 
 const ApiFilterPropsSchema = z.object({
-  page: z.number().min(1, { message: 'The page must be at least 1.' }).optional().default(1),
-  per_page: z.number().min(1).max(1000, { message: 'The per_page value must not be larger than 1000' }).optional().default(10),
+  page: z.number().min(1, { message: 'The page must be at least 1.' }).default(1).optional(),
+  per_page: z.number().min(1).max(1000, { message: 'The per_page value must not be larger than 1000' }).default(10).optional(),
   exclude: z.array(z.string()).optional(),
   include: z.array(z.string()).optional(),
   offset: z.number().min(1).optional(),
-  orderby: z.enum(['date', 'modified', 'id', 'include', 'title', 'slug']).optional().default('date'),
-  status: z.enum(['pending', 'processing', 'on-hold', 'completed', 'cancelled', 'refunded', 'failed', 'trash', 'any']).optional().default('any'),
+  orderby: z.enum(['date', 'modified', 'id', 'include', 'title', 'slug']).default('date').optional(),
 })
 
 const strippedSchema = stripZodDefault(ApiFilterPropsSchema)
