@@ -1,10 +1,9 @@
 import { useWoocommerce } from '@/api/useWoocommerce'
 import { Order, validateOrders } from '@/schemas/orders/Order'
-import { BaseFilterProps, validateBaseFilterProps } from '@/schemas/filters/BaseFilterProps'
+import { OrderFilterProps, validateOrderFilterProps } from '@/schemas/filters/OrderFilter'
 
-export async function getOrders(filterProps: BaseFilterProps = {}): Promise<Order[] | never> {
-  const filters = validateBaseFilterProps(filterProps)
-
+export async function getOrders(filterProps: OrderFilterProps = {}): Promise<Order[] | never> {
+  const filters = validateOrderFilterProps(filterProps)
   const { get } = useWoocommerce()
 
   const orders = await get<Order[]>('orders', filters)
