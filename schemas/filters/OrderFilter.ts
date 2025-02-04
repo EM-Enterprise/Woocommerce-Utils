@@ -2,7 +2,7 @@ import { extendBaseFilterPropsSchema } from '@/schemas/filters/BaseFilterProps'
 import { z } from 'zod'
 
 const OrderFilterPropsSchema = extendBaseFilterPropsSchema({
-  status: z.enum(['pending', 'processing', 'on-hold', 'completed', 'cancelled', 'refunded', 'failed', 'trash', 'any']).optional().default('any'),
+  status: z.enum(['pending', 'processing', 'on-hold', 'completed', 'cancelled', 'refunded', 'failed', 'trash', 'any']).default('any').optional(),
 })
 
 export type OrderFilterProps = z.infer<typeof OrderFilterPropsSchema>
