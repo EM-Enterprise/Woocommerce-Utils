@@ -1,8 +1,8 @@
 import { z } from 'zod'
 import { useSchema } from '@/schemas/utils/useSchema'
 
-const dateString = z.string() //.transform((val) => new Date(val))
-const stringToNumber = z.string() //.transform((val) => (val.trim().length > 0 ? parseFloat(val) : null))
+const dateString = z.union([z.string(), z.date()]).transform((val) => (typeof val === 'object' ? val : new Date(val)))
+const stringToNumber = z.union([z.string(), z.number(), z.null()]).transform((val) => (val != null && val.toString().trim().length > 0 ? parseFloat(val.toString()) : null))
 
 const ProductVariationSchema = z.object({
   id: z.number(),
