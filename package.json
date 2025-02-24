@@ -6,7 +6,7 @@
   "types": "dist/typings/index",
   "scripts": {
     "build": "tsc --build tsconfig.build.json",
-    "prepublishOnly": "npm run build & npm run docs",
+    "prepublishOnly": "npm run build",
     "docs": "typedoc --options typedoc.json",
     "semantic-release": "semantic-release"
   },
