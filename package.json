@@ -3,13 +3,35 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/index",
-  "types": "dist/typings/index",
+  "types": "dist/index",
   "scripts": {
     "build": "tsc --build tsconfig.build.json",
     "test": "jest --coverage",
     "prepublishOnly": "npm run build",
     "docs": "typedoc --options typedoc.json",
     "semantic-release": "semantic-release"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./schemas/*": {
+      "import": "./dist/schemas/*.js",
+      "require": "./dist/schemas/*.cjs",
+      "types": "./dist/schemas/*.d.ts"
+    },
+    "./internal/functions/*": {
+      "import": "./dist/functions/*.js",
+      "require": "./dist/functions/*.cjs",
+      "types": "./dist/functions/*.d.ts"
+    },
+    "./internal/api/*": {
+      "import": "./dist/api/*.js",
+      "require": "./dist/api/*.cjs",
+      "types": "./dist/api/*.d.ts"
+    }
   },
   "author": "",
   "license": "ISC",
