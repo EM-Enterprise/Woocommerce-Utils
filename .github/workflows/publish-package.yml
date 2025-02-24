@@ -1,0 +1,72 @@
+name: Publish NPM Package to GitHub Packages Registry
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish-package:
+    runs-on: ubuntu-latest
+    
+    env:
+      REPO_NAME: ${{ github.repository }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node 21
+        uses: actions/setup-node@v4
+        with:
+          node-version: '21'
+          registry-url: 'https://npm.pkg.github.com'
+
+      - run: |
+          echo "//npm.pkg.github.com/:_authToken=${{secrets.NPM_TOKEN}}" > .npmrc
+
+      - name: Install Dependencies
+        run: yarn
+
+      - name: 'Get Previous tag'
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        with:
+          fallback: v1.0.0 # Optional fallback tag to use when no tag can be found
+
+      - run: |
+          echo "NEW_VERSION=${{ steps.previoustag.outputs.tag }}" >> $GITHUB_ENV
+
+
+      - name: Check if Version is Already Published
+        id: check_published
+        run: |
+          echo "Checking if version ${NEW_VERSION} is already published"
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+          
+          # Attempt to fetch published versions; handle failure if no versions are published
+          PUBLISHED_VERSIONS=$(npm show "$PACKAGE_NAME" versions --json 2>/dev/null || echo "[]")
+          echo "Published versions: $PUBLISHED_VERSIONS"
+          
+          if echo "$PUBLISHED_VERSIONS" | grep -q "\"${NEW_VERSION}\""; then
+            echo "VERSION_ALREADY_PUBLISHED=true" >> $GITHUB_ENV
+          else
+            echo "VERSION_ALREADY_PUBLISHED=false" >> $GITHUB_ENV
+          fi
+
+      - name: Set Package Version
+        if: env.VERSION_ALREADY_PUBLISHED == 'false'
+        id: set_version
+        run: |
+          npm version ${NEW_VERSION} --no-git-tag-version
+          echo "Increased package version to ${NEW_VERSION}"
+
+      - name: Publish Package
+        if: env.VERSION_ALREADY_PUBLISHED == 'false'
+        run: |
+          echo "Publishing package version ${NEW_VERSION}"
+          npm publish
