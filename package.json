@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/index",
-  "types": "dist/typings/index",
+  "types": "dist/index",
   "scripts": {
     "build": "tsc --build tsconfig.build.json",
     "test": "jest --coverage",
