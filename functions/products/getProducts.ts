@@ -2,6 +2,7 @@ import { useWoocommerce } from '@/api/useWoocommerce'
 import { Product, validateProduct, validateProducts } from '@/schemas/products/Product'
 import { ProductFilterProps, validateProductFilterProps } from '@/schemas/filters/ProductFilter'
 import { ProductVariation, validateProductVariations } from '@/schemas/products/ProductVariation'
+import Bottleneck from 'bottleneck'
 
 export async function getProducts(filterProps: ProductFilterProps): Promise<Product[] | never> {
   const filters = validateProductFilterProps(filterProps)
@@ -23,17 +24,21 @@ export async function getProducts(filterProps: ProductFilterProps): Promise<Prod
 async function collectVariations(products: Product[]): Promise<Product[]> {
   const variableProducts = products.filter((p) => p.type === 'variable')
 
-  const promises = variableProducts.map((variableParentProduct, i) =>
-    getProductVariations(variableParentProduct.id).then((variations): Product[] => {
-      return [
-        ...variations.map((variation) => {
-          variableParentProduct.variations = []
-          variation.name = `${variableParentProduct.name} - ${variation.name}`
+  const limiter = new Bottleneck({ maxConcurrent: 25, minTime: 250 })
 
-          return validateProduct(Object.assign(Object.create(variableParentProduct), variation))
-        }),
-      ]
-    }),
+  const promises = variableProducts.map((variableParentProduct, i) =>
+    limiter.schedule(() =>
+      getProductVariations(variableParentProduct.id).then((variations): Product[] => {
+        return [
+          ...variations.map((variation) => {
+            variableParentProduct.variations = []
+            variation.name = `${variableParentProduct.name} - ${variation.name}`
+
+            return validateProduct(Object.assign(Object.create(variableParentProduct), variation))
+          }),
+        ]
+      }),
+    ),
   )
 
   const productVariations = await Promise.all(promises)
