@@ -7,7 +7,8 @@
   "scripts": {
     "build": "tsc --build tsconfig.build.json",
     "prepublishOnly": "npm run build & npm run docs",
-    "docs": "typedoc --options typedoc.json"
+    "docs": "typedoc --options typedoc.json",
+    "semantic-release": "semantic-release"
   },
   "author": "",
   "license": "ISC",
