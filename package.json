@@ -9,6 +9,7 @@
     "prepublishOnly": "npm run build & npm run docs",
     "test": "jest --coverage",
     "docs": "typedoc --options typedoc.json"
+    "semantic-release": "semantic-release"
   },
   "author": "",
   "license": "ISC",
