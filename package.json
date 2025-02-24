@@ -1,13 +1,13 @@
 {
-  "name": "woocommerce-utils",
+  "name": "@em-enterprise/woocommerce-utils",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index",
   "types": "dist/typings/index",
   "scripts": {
     "build": "tsc --build tsconfig.build.json",
-    "prepublishOnly": "npm run build & npm run docs",
     "test": "jest --coverage",
+    "prepublishOnly": "npm run build",
     "docs": "typedoc --options typedoc.json",
     "semantic-release": "semantic-release"
   },
@@ -43,5 +43,13 @@
     "typescript": "^5.3.3",
     "zod": "^3.24.1",
     "zod-validation-error": "^3.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EM-Enterprise/Woocommerce-Utils.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
   }
 }
