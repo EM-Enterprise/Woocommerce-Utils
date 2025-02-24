@@ -10,7 +10,7 @@
 /node_modules
 /docs
 /dist
-
+/coverage
 
 # Others
 .DS_Store
@@ -22,4 +22,7 @@
 !tsconfig*.json
 !prettierrc.json
 !typedoc.json
+!.releaserc.json
 
+# Development
+/tests/example.test.ts
