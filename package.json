@@ -8,14 +8,21 @@
     "build": "tsc --build tsconfig.build.json",
     "prepublishOnly": "npm run build & npm run docs",
     "test": "jest --coverage",
-    "docs": "typedoc --options typedoc.json"
+    "docs": "typedoc --options typedoc.json",
+    "semantic-release": "semantic-release"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.1",
+    "@semantic-release/release-notes-generator": "^14.0.3",
     "@woocommerce/woocommerce-rest-api": "^1.0.1",
     "bottleneck": "^2.19.5",
-    "fetch": "^1.1.0"
+    "conventional-changelog-conventionalcommits": "^8.0.0",
+    "fetch": "^1.1.0",
+    "semantic-release": "^24.2.3"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
