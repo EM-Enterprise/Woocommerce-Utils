@@ -40,5 +40,13 @@
     "typedoc-plugin-missing-exports": "^2.2.0",
     "typedoc-plugin-rename-defaults": "^0.7.0",
     "typescript": "^5.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EM-Enterprise/Woocommerce-Utils.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
   }
 }
