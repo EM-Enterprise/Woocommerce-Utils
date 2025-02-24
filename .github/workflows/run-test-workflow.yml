@@ -4,6 +4,11 @@ jobs:
   run-all-tests:
     runs-on: ubuntu-latest
 
+    env:
+      CONSUMER_KEY: ${{ secrets.WOOCOMMERCE_CONSUMER_KEY }}
+      CONSUMER_SECRET: ${{ secrets.WOOCOMMERCE_CONSUMER_SECRET }}
+      DOMAIN: ${{ secrets.WOOCOMMERCE_DOMAIN }}
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
