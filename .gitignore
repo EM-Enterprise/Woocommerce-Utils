@@ -22,4 +22,7 @@
 !tsconfig*.json
 !prettierrc.json
 !typedoc.json
+!.releaserc.json
 
+# Development
+/tests/example.test.ts
