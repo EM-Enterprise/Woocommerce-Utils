@@ -1,5 +1,5 @@
 {
-  "name": "woocommerce-utils",
+  "name": "@em-enterprise/woocommerce-utils",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index",
