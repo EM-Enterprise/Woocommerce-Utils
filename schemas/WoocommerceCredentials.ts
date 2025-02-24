@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { StripZodDefault } from '@/schemas/utils/stripZodDefaultValues'
 
 const WoocommerceCredentialsSchema = z.object({
   url: z.string().refine((value) => /^(https?):\/\/(?=.*\.[a-z]{2,})[^\s$.?#].[^\s]*$/i.test(value), {
@@ -10,7 +9,7 @@ const WoocommerceCredentialsSchema = z.object({
   version: z.enum(['wc/v3', 'wc/v2', 'wc/v1', 'wc-api/v3', 'wc-api/v2', 'wc-api/v1']).optional(),
 })
 
-export type WoocommerceCredentials = z.infer<StripZodDefault<typeof WoocommerceCredentialsSchema>>
+export type WoocommerceCredentials = z.infer<typeof WoocommerceCredentialsSchema>
 
 /**
  * Validates the given object against the WoocommerceCredentials schema and provides default values for missing properties

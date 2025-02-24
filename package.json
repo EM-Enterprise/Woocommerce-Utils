@@ -5,7 +5,7 @@
   "main": "dist/index",
   "types": "dist/index",
   "scripts": {
-    "build": "tsc --build tsconfig.build.json",
+    "build": "tsc --build tsconfig.build.json && tsc-alias",
     "test": "jest --coverage",
     "prepublishOnly": "npm run build",
     "docs": "typedoc --options typedoc.json",
@@ -44,7 +44,8 @@
     "bottleneck": "^2.19.5",
     "conventional-changelog-conventionalcommits": "^8.0.0",
     "fetch": "^1.1.0",
-    "semantic-release": "^24.2.3"
+    "semantic-release": "^24.2.3",
+    "tsc-alias": "^1.8.10"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
